@@ -14,8 +14,15 @@ const link = createHttpLink({
 
 const client = new ApolloClient({
   link: link,
-  cache: new InMemoryCache()
-});
+  cache: new InMemoryCache(),
+  request: operation => {
+    operation.setContext({
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('authUserToken')}`
+      },
+    })
+  }
+})
 
 ReactDOM.render(
   <ApolloProvider client={client}>
