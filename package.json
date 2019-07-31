@@ -22,7 +22,11 @@
     "build-js": "react-scripts build",
     "build": "npm-run-all build-css build-js",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "cypressOpen": "cypress open",
+    "cypressLive": "cypress run --record",
+    "cypressOpenWindows": "DISPLAY=localhost:0.0 cypress open",
+    "cypressLiveWindows": "DISPLAY=localhost:0.0 cypress run --record"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -38,5 +42,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "cypress": "^3.4.1"
   }
 }
