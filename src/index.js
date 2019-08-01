@@ -1,27 +1,41 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import './styles/index.css'
 import App from './layouts/App'
 import * as serviceWorker from './serviceWorker'
 import { ApolloProvider } from 'react-apollo'
 import { ApolloClient } from 'apollo-client'
-import { createHttpLink } from 'apollo-link-http'
-import { InMemoryCache } from 'apollo-cache-inmemory'
+import { HttpLink } from 'apollo-link-http'
+import { InMemoryCache, IntrospectionFragmentMatcher } from 'apollo-cache-inmemory'
+import { setContext } from 'apollo-link-context'
 
-const link = createHttpLink({
+
+const httpLink = new HttpLink({
   uri: 'http://localhost:3000/graphql'
-});
+})
+
+const authLink = setContext((_, { headers }) => {
+  // get the authentication token from local storage if it exists
+  const token = localStorage.getItem('authUserToken')
+  // return the headers to the context so httpLink can read them
+  return {
+    headers: {
+      ...headers,
+      Authorization: `Bearer: ${token}`
+    }
+  }
+})
+
+const fragmentMatcher = new IntrospectionFragmentMatcher({
+  introspectionQueryResultData: {
+    __schema: {
+      types: []
+    }
+  }
+})
 
 const client = new ApolloClient({
-  link: link,
-  cache: new InMemoryCache(),
-  request: operation => {
-    operation.setContext({
-      headers: {
-        authorization: `Bearer ${localStorage.getItem('authUserToken')}`
-      },
-    })
-  }
+  link: authLink.concat(httpLink),
+  cache: new InMemoryCache({ fragmentMatcher })
 })
 
 ReactDOM.render(

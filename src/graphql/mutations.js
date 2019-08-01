@@ -25,7 +25,37 @@ export const CREATE_QUESTION_MUTATION = gql`
         id
         body
         title
+        options {
+          id
+          body
+          correctAnswer
+        }
       }
+    }
+  }
+`
+
+export const EDIT_QUESTION_MUTATION = gql`
+  mutation editQuestion($input: EditQuestionInput!) {
+    editQuestion(input: $input) {
+      question {
+        id
+        body
+        title
+        options {
+          id
+          body
+          correctAnswer
+        }
+      }
+    }
+  }
+`
+
+export const DELETE_QUESTION_MUTATION = gql`
+  mutation deleteQuestion($input: DeleteQuestionInput!) {
+    deleteQuestion(input: $input) {
+      errors
     }
   }
 `
@@ -45,5 +75,6 @@ export default {
   LOGIN_MUTATION,
   CREATE_USER_MUTATION,
   CREATE_QUESTION_MUTATION,
-  ADD_OPTION_MUTATION
+  ADD_OPTION_MUTATION,
+  DELETE_QUESTION_MUTATION
 }

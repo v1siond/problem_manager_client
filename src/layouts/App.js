@@ -1,9 +1,11 @@
 import React, {createContext} from 'react'
 import '../styles/App.css'
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom"
-import Home from '../pages/Home'
-import Login from '../pages/Login'
-import Signup from '../pages/Signup'
+import Login from './Login'
+import Signup from './Signup'
+import Header from '../components/Header'
+import Question from '../pages/Question'
+import Sidebar from '../components/Sidebar'
 
 const UserContext = createContext()
 
@@ -17,9 +19,9 @@ const reducer = (state, action) => {
       return {
         ...state,
         authUserToken: action.payload
-      };
+      }
     default:
-      return state;
+      return state
   }
 }
 
@@ -46,11 +48,15 @@ const App = () => {
           <Router>
             {
               user.authUserToken ? (
-                <div>
-                  <Route exact path="/" component={Home} />
-                </div>
+                <main className="main-wrapper">
+                  <Header handleLogout={user.handleLogin}/>
+                  <section className="question-wrapper">
+                    <Sidebar />
+                    <Route exact path="/question/:id?" component={Question} />
+                  </section>
+                </main>
               ) : (
-                <div>
+                <main className="main-wrapper -logout">
                   <Redirect to="/Login" component={Login} />
                   <Route exact path="/login" component={() => {
                     return <Login handleLogin={user.handleLogin} />
@@ -58,7 +64,7 @@ const App = () => {
                   <Route exact path="/signup" component={() => {
                     return <Signup handleLogin={user.handleLogin} />
                   }} />
-                </div>
+                </main>
               )
             }
           </Router>

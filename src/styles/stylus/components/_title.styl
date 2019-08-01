@@ -1,0 +1,20 @@
+.title
+  color fontColor
+  font-size 125%
+  font-weight bold
+  &.-opaque
+    color darken(lightGrey, 15%)
+    font-weight normal
+    padding 2rem
+    text-align center
+    width 100%
+  &.-question
+    color lighten(fontColor, 10%)
+    font-size 100%
+    font-weight 500
+    margin-bottom 1.5rem
+    > a
+      color lighten(fontColor, 10%)
+  &.-selected,
+  &.-selected > a
+    color primary
