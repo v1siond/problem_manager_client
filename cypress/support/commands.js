@@ -1,25 +1,32 @@
-// ***********************************************
-// This example commands.js shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add("login", (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add("drag", { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add("dismiss", { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This is will overwrite an existing command --
-// Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+Cypress.Commands.add("fillInputText", (id, text, eq = 0) => {
+  cy.get(`${id}`).eq(eq)
+    .clear()
+    .type(text)
+    .should('have.value', text)
+  cy.get(`${id}`).eq(eq).blur()
+  cy.wait(1000)
+})
+
+Cypress.Commands.add("signup", (email, name, password) => {
+  cy.fillInputText('#email', email)
+  cy.fillInputText('#name', name)
+  cy.fillInputText('#password', password)
+
+  cy.contains('button', 'Signup').click()
+  cy.wait(1000)
+  cy.contains('a', 'Add Question')
+})
+
+Cypress.Commands.add("logout", () => {
+  cy.get('#logout').click()
+  cy.contains('button', 'Login')
+  cy.url().should('include', '/Login')
+})
+
+Cypress.Commands.add("login", (email, password) => {
+  cy.visit('http://localhost:8080')
+  cy.fillInputText('#email', email)
+  cy.fillInputText('#password', password)
+  cy.contains('Login').click()
+  cy.wait(1000)
+})

@@ -194,6 +194,7 @@ class NewQuestion extends Component {
                 {(deleteQuestion, { data, loading, error }) => {
                   return (
                     <button
+                      id='deleteQuestionButton'
                       className="rounded-button -negative"
                       onClick={() => {
                         this.deleteQuestion(deleteQuestion, this.state.questionId)

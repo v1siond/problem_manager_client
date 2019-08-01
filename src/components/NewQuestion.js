@@ -94,7 +94,7 @@ class NewQuestion extends Component {
                       </label>
                       <div>
                         {!field.correctAnswer && (
-                          <button className="option-button -positive" onClick={() => this.setCorrect(index)}>
+                          <button id={`set-correct-${index}`} className="option-button -positive" onClick={() => this.setCorrect(index)}>
                             Set correct answer
                           </button>
                         )}

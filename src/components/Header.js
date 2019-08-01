@@ -46,11 +46,11 @@ class Header extends Component {
             <h1 className="title">Problem manager</h1>
           </li>
           <li className="buttons">
-            <Link className="rounded-button -primary" to="/question" title="Add Question">
+            <Link id="addQuestion" className="rounded-button -primary" to="/question" title="Add Question">
               <FontAwesomeIcon icon={faPlus} />
               <span>Add Question</span>
             </Link>
-            <button className="rounded-button -circle -primary" title="Logout">
+            <button id="logout" className="rounded-button -circle -primary" title="Logout">
               <FontAwesomeIcon icon={faUser} onClick={() => {this.logOut(this.props.handleLogout)}} />
             </button>
           </li>

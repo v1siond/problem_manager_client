@@ -11,17 +11,17 @@ const OptionInput = ({field, index, setCorrect, removeOption, handleOptionChange
         </label>
         <div>
           {!field.correctAnswer && (
-            <button className="option-button -positive" onClick={() => setCorrect(index)}>
+            <button id={`set-correct-${oldOptionsLength ? oldOptionsLength + index + 1 : index}`} className="option-button -positive" onClick={() => setCorrect(index)}>
               Set correct answer
             </button>
           )}
-          <button className="option-button -negative" onClick={() => removeOption(index)}>
+          <button id={`delete-${oldOptionsLength ? oldOptionsLength + index + 1 : index}`} className="option-button -negative" onClick={() => removeOption(index)}>
             Delete option
           </button>
         </div>
       </div>
       <input
-        id={`option-${index}`}
+        id={`option-${oldOptionsLength ? oldOptionsLength + index + 1 : index}`}
         type="text"
         className="input"
         value={field.body}

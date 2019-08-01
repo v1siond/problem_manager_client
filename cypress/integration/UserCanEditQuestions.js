@@ -1,0 +1,20 @@
+describe('I can edit questions', () => {
+  before(() => {
+    cy.login('test-email@email.com', 'fakePassword')
+  })
+  it('Edits a questions with options', () => {
+    cy.contains('a', 'Problem # 1.12').click()
+    cy.fillInputText('#title', 'Problem # 1.12 Edited')
+    cy.fillInputText('#body', 'This is a test body Edited')
+    cy.contains('button', 'Add Option').click()
+    cy.contains('button', 'Add Option').click()
+    cy.fillInputText('#option-3', 'Option C')
+    cy.fillInputText('#option-4', 'Option D')
+    cy.get('#set-correct-3').click()
+    cy.get('#delete-0').click()
+    cy.contains('button', 'Save').click()
+    cy.wait(1500)
+    cy.get('.title.-question.-selected').contains('a', 'Problem # 1.12 Edited')
+    cy.logout()
+  })
+})
