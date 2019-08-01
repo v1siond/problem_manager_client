@@ -1,0 +1,20 @@
+.sidebar
+  background-color lightGrey
+  bottom 0
+  box-shadow .15rem 0 0 0 darken(lightGrey, 5%)
+  left -120%
+  height 100vh
+  max-width 25rem
+  overflow auto
+  padding 1.5rem
+  position absolute
+  transition fastTransition
+  width 80%
+  +media(tablet)
+    left 0
+    height calc(100vh - 3.5rem)
+    max-width unset
+    position relative
+    width 100%
+  &.show
+    left 0

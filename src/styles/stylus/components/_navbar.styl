@@ -1,0 +1,27 @@
+.navbar
+  align-content flex-start
+  background-color white
+  flex(flex-start, space-between)
+  height 100vh
+  left -20rem
+  padding 1rem 1.5rem
+  position absolute
+  top 0
+  transition fastTransition
+  width 17.5rem
+  z-index 2
+  +media(tablet)
+    align-items center
+    box-shadow 0 .2rem 0 0 darken(lightGrey, 5%)
+    height unset
+    left 0
+    position relative
+    width 100%
+  &.-show
+    left 0
+  .buttons > .rounded-button:nth-child(1)
+    margin-right .5rem
+  > li
+    margin-bottom 1.5rem
+    +media(tablet)
+      margin-bottom 0
