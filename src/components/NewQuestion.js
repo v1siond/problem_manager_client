@@ -50,7 +50,7 @@ class NewQuestion extends Component {
   }
 
   validateForm() {
-    return this.state.title.length > 0 && this.state.body.length > 0 && this.state.options.length > 0
+    return this.state.title.length > 0 && this.state.body.length > 0
   }
 
   render () {
